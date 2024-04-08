@@ -1,0 +1,25 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: employee-management
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/adrealm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: adihome
+  jpa:
+    show-sql: true
+application:
+  cors:
+    allowedOrigins: http://localhost:3000, http://localhost:3001
+    allowedMethods: PUT, GET, POST, DELETE
+    allowedHeaders: Authorization, Content-Type
+    allowedCredentials: false
+  access-control-service:
+    url: http://localhost:8081
+    permissionsPath: /permissions
